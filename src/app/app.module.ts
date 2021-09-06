@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 import { BookmarksModule } from './pages/bookmarks/bookmarks.module';
 import { HomeModule } from './pages/home/home.module';
 import { EffectsModule } from '@ngrx/effects';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { EffectsModule } from '@ngrx/effects';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     HomeModule,
