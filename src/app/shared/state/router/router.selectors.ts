@@ -6,7 +6,7 @@ const selectRouterReducerState = createFeatureSelector<RouterReducerState<IRoute
 
 export const selectRouterState = createSelector(
     selectRouterReducerState,
-    (routerReducerState: RouterReducerState<IRouterState>) => (routerReducerState && routerReducerState.state)
+    (routerReducerState: RouterReducerState<IRouterState>) => (routerReducerState && routerReducerState.state) || {},
 );
 
 export const selectRouterQueryParams = createSelector(

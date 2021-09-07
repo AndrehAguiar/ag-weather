@@ -19,7 +19,7 @@ export class DetailsPage implements OnInit {
   loading$!: Observable<boolean>;
   error$!: Observable<boolean>;
 
-  unit$!: Observable<Units>;
+  unit$: Observable<Units> = new Observable<Units>();
 
   constructor(private store: Store<IAppState>) { }
 

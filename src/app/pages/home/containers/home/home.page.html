@@ -1,8 +1,8 @@
 <div class="container-fluid">
-    <div class="search-container row">
+    <div class="search-container">
 
-        <div class="form-group col-5">
-            <label>{{ text }}</label>
+        <div class="form-group">
+            <label>Pesquisar</label>
             <div class="search">
                 <input type="text" class="form-control" [formControl]="searchControl">
                 <button class="btn btn-dark" [disabled]="!searchControl.valid" (click)="doSearch()">Pesquisar</button>
@@ -17,7 +17,7 @@
 
     <ag-loader *ngIf="loading$ | async"></ag-loader>
     <div *ngIf="!(loading$ | async) && !(error$ | async) && !!cityWeather">
-        <ag-current-weather [cityWeather]="cityWeather!" [isFavorite]="(isCurrentFavorite$ | async)!" (toggleBookmark)="onToggleBookmark()"></ag-current-weather>
+        <ag-current-weather [cityWeather]="cityWeather" [isFavorite]="(isCurrentFavorite$ | async)!" [unit]="(unit$ | async)!" (toggleBookmark)="onToggleBookmark()"></ag-current-weather>
     </div>
 
     <div *ngIf="!(loading$ | async) && (error$ | async)">

@@ -21,11 +21,8 @@ export class UnitSelectorComponent implements OnInit {
   constructor(private store: Store<IAppState>) { }
 
   ngOnInit(): void {
-    this.unit$ = this.store.pipe(
-      select(fromConfigSelectors.selectUnitConfig)
-    );
+    this.unit$ = this.store.pipe(select(fromConfigSelectors.selectUnitConfig));
     this.unit$.subscribe(unit => this.unit = unit);
-
   }
 
   updateUnit(unit: Units){

@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
@@ -14,19 +14,22 @@ import { responseToCityDailyWeather, responseToCityWeather } from '../utils/resp
 @Injectable({
   providedIn: 'root'
 })
-export class WeatherService {
+export class WeatherService implements OnDestroy{
 
   private unit!: Units;
   private serviceDestroyed$ = new Subject();
 
   constructor(private http: HttpClient,
     private store: Store<IAppState>) {
-    store
-      .pipe(
-        select(fromConfigSelectors.selectUnitConfig),
+      
+    store.pipe(select(fromConfigSelectors.selectUnitConfig),
         takeUntil(this.serviceDestroyed$),
-      )
-      .subscribe((unit: Units) => this.unit = unit);
+      ).subscribe((unit: Units) => this.unit = unit);
+  }
+
+  ngOnDestroy(){
+    this.serviceDestroyed$.next();
+    this.serviceDestroyed$.unsubscribe();
   }
 
   getCityWeatherByQuery(query: string): Observable<CityWeather> {
@@ -70,6 +73,6 @@ export class WeatherService {
     if (this.unit !== Units.SI) {
       params = params.append('units', this.unit.toLocaleLowerCase());
     }
-    return this.http.get<T>(`https://api.openweathermap.org/data/2.5/${url}`, { params });
+    return this.http.get<T>(`https://api.openweathermap.org/data/2.5/${ url }`, { params });
   }
 }

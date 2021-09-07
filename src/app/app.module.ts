@@ -10,7 +10,6 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BookmarksModule } from './pages/bookmarks/bookmarks.module';
-import { DetailsModule } from './pages/details/details.module';
 import { HomeModule } from './pages/home/home.module';
 import { reducers } from './shared/state/app.reducer';
 import { CustomRouterSerializer } from './shared/state/router/router.reducer';
@@ -27,7 +26,6 @@ import { CustomRouterSerializer } from './shared/state/router/router.reducer';
     HttpClientModule,
     HomeModule,
     BookmarksModule,
-    DetailsModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),

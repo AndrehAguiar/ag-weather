@@ -13,16 +13,13 @@ import * as fromDetailsActions from "./details.actions";
 export class DetailsEffects {
 
     loadCurrentWeather$ = createEffect(() => this.actions$
-        .pipe(
-            ofType(fromDetailsActions.loadWeatherDetails),
-            withLatestFrom(this.store.pipe(
-                select(fromRouterSelectors.selectRouterQueryParams))),
+        .pipe(ofType(fromDetailsActions.loadWeatherDetails),
+            withLatestFrom(this.store.pipe(select(fromRouterSelectors.selectRouterQueryParams))),
             mergeMap(([, queryParams]: [any, Params]) =>
                 combineLatest([
                     this.weatherService.getCityWeatherByCoord(queryParams.lat, queryParams.lon),
                     this.weatherService.getWeatherDetails(queryParams.lat, queryParams.lon),
-                ])
-            ),
+                ])),
             catchError((err, caught$) => {
                 this.store.dispatch(fromDetailsActions.loadWeatherDetailsFailed());
                 return caught$;

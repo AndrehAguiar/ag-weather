@@ -24,18 +24,17 @@ import { UnitSelectorComponent } from '../unit-selector/unit-selector.component'
 export class HomePage implements OnInit, OnDestroy {
 
   cityWeather$!: Observable<CityWeather>;
+  cityWeather!: CityWeather;
   loading$!: Observable<boolean>;
   error$!: Observable<boolean>;
 
   bookmarksList$!: Observable<Array<Bookmark>>;
   isCurrentFavorite$!: Observable<boolean>;
 
-  cityWeather!: CityWeather;
   searchControl!: FormControl;
   searchControlWithAutocomplete!: FormControl;
 
   unit$!: Observable<Units>;
-  text!: string;
 
   private componentDestroyed$ = new Subject();
   private portalOutlet!: PortalOutlet;
@@ -46,13 +45,6 @@ export class HomePage implements OnInit, OnDestroy {
     private injector: Injector) { }
 
   ngOnInit(): void {
-
-    this.cityWeather$ = this.store.pipe(select(fromHomeSelectors.selectCurrentWeather));
-    this.loading$ = this.store.pipe(select(fromHomeSelectors.selectCurrentWeatherLoading));
-    this.error$ = this.store.pipe(select(fromHomeSelectors.selectCurrentWeatherError));
-    this.bookmarksList$ = this.store.pipe(select(fromBookmarksSelectors.selectBookmarksList));
-    this.unit$ = this.store.pipe(select(fromConfigSelectors.selectUnitConfig));
-
     this.searchControl = new FormControl('', Validators.required);
     this.searchControlWithAutocomplete = new FormControl(undefined);
 
@@ -66,17 +58,29 @@ export class HomePage implements OnInit, OnDestroy {
         }
       });
 
+    this.cityWeather$ = this.store.pipe(select(fromHomeSelectors.selectCurrentWeather));
+
     this.cityWeather$
       .pipe(takeUntil(this.componentDestroyed$))
       .subscribe(value => this.cityWeather = value);
 
+    this.loading$ = this.store.pipe(select(fromHomeSelectors.selectCurrentWeatherLoading));
+
+    this.error$ = this.store.pipe(select(fromHomeSelectors.selectCurrentWeatherError));
+
+    this.bookmarksList$ = this.store.pipe(select(fromBookmarksSelectors.selectBookmarksList));
+
     this.isCurrentFavorite$ = combineLatest([this.cityWeather$, this.bookmarksList$])
       .pipe(map(([current, bookmarksList]) => {
         if (!!current) {
-          return bookmarksList.some(bookmark => bookmark.id === current.city.id)
+          return bookmarksList.some(bookmark => bookmark.id === current.city.id);
         }
         return false;
-      }));
+      }),
+      );
+
+    this.unit$ = this.store.pipe(select(fromConfigSelectors.selectUnitConfig));
+
     this.setupPortal();
   }
 
@@ -103,7 +107,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   private setupPortal() {
-    const el = document.querySelector('#navbar-portal-outlet');
+    const el = document.querySelector('.navbar-portal-outlet');
     this.portalOutlet = new DomPortalOutlet(
       el!,
       this.componentFactoryResolver,
