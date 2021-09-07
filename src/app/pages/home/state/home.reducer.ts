@@ -1,13 +1,13 @@
 import { Action, createReducer, on } from "@ngrx/store"
 import * as fromHomeActions from "./home.actions"
 
-export interface HomeState{
+export interface IHomeState{
     entity: any;
     loading: boolean;
     error: boolean;
 }
 
-export const homeInitialState: HomeState = {
+export const homeInitialState: IHomeState = {
     entity: undefined,
     loading: false,
     error: false,
@@ -32,6 +32,6 @@ const reducer = createReducer(
     })),
 );
 
-export function homeReducer(state: HomeState | undefined, action: Action): HomeState {
+export function homeReducer(state: IHomeState | undefined, action: Action): IHomeState {
     return reducer(state, action);
 }

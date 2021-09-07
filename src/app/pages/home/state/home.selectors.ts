@@ -1,23 +1,23 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { HomeState } from "./home.reducer";
+import { IHomeState } from "./home.reducer";
 
 export interface AppState {
-    feature: HomeState;
+    feature: IHomeState;
   }
 
-export const selectHomeState = createFeatureSelector<HomeState>('home');
+export const selectHomeState = createFeatureSelector<IHomeState>('home');
 
 export const selectCurrentWeather = createSelector(
   selectHomeState,
-  (homeState: HomeState) => homeState.entity,
+  (homeState: IHomeState) => homeState.entity,
 );
 
 export const selectCurrentWeatherLoading = createSelector(
   selectHomeState,
-  (homeState: HomeState) => homeState.loading,
+  (homeState: IHomeState) => homeState.loading,
 );
 
 export const selectCurrentWeatherError = createSelector(
   selectHomeState,
-  (homeState: HomeState) => homeState.error,
+  (homeState: IHomeState) => homeState.error,
 );

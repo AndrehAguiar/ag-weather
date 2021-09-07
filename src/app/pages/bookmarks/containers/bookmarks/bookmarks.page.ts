@@ -3,7 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { Bookmark } from 'src/app/shared/models/bookmark.model';
 import * as fromBookmarksActions from '../../state/bookmarks.actions';
-import { BookmarksState } from '../../state/bookmarks.reducer';
+import { IBookmarksState } from '../../state/bookmarks.reducer';
 import * as fromBookmarksSelectors from '../../state/bookmarks.selectors';
 
 
@@ -18,7 +18,7 @@ export class BookmarksPage implements OnInit, OnDestroy {
 
   private componentDestroyed$ = new Subject();
 
-  constructor(private store: Store<BookmarksState>) { }
+  constructor(private store: Store<IBookmarksState>) { }
 
   ngOnInit(): void {
     this.bookmarks$ = this.store.pipe(
