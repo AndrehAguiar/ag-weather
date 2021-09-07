@@ -17,8 +17,8 @@
 
     <ag-loader *ngIf="loading$ | async"></ag-loader>
 
-    <div *ngIf="!(loading$ | async) && !(error$ | async) && !!(cityWeather$ | async)">
-        <ag-current-weather [cityWeather]="(cityWeather$ | async)!"></ag-current-weather>
+    <div *ngIf="!(loading$ | async) && !(error$ | async) && !!cityWeather">
+        <ag-current-weather [cityWeather]="cityWeather!" [isFavorite]="(isCurrentFavorite$ | async)!" (toggleBookmark)="onToggleBookmark()"></ag-current-weather>
     </div>
 
     <div *ngIf="!(loading$ | async) && (error$ | async)">
