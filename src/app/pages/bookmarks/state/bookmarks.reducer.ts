@@ -20,7 +20,11 @@ const reducer = createReducer(
     })),
     on(fromBookmarkActions.removeBookmark, (state, { id }) => ({
         ...state,
-        list: state.list.filter(bookmark => bookmark.id),
+        list: state.list.filter(bookmark => bookmark.id !== id),
+    })),
+    on(fromBookmarkActions.updateBookmarksList, (state, { list }) => ({
+        ...state,
+        list,
     })),
 );
 
@@ -29,7 +33,7 @@ export function bookmarkReducer(state: BookmarksState | undefined, action: Actio
 };
 
 function toogleBookmark(list: Array<Bookmark>, entity: Bookmark): Array<Bookmark> {
-    if(!!list.find(bookmark => bookmark.id)){
+    if(!!list.find(bookmark => bookmark.id === entity.id)){
         return list.filter(bookmark => bookmark.id !== entity.id);
     }
     return [...list, entity];

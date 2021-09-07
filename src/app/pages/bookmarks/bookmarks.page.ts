@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Bookmark } from 'src/app/shared/models/bookmark.model';
 import { BookmarksState } from './state/bookmarks.reducer';
 
@@ -15,6 +15,8 @@ import * as fromBookmarksSelectors from '../bookmarks/state/bookmarks.selectors'
 export class BookmarksPage implements OnInit, OnDestroy {
 
   bookmarks$!: Observable<Array<Bookmark>>;
+  
+  private componentDestroyed$ = new Subject();
 
   constructor(private store: Store<BookmarksState>) { }
 
@@ -25,7 +27,8 @@ export class BookmarksPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-
+    this.componentDestroyed$.next();
+    this.componentDestroyed$.unsubscribe();
   }
 
   removeBookmark(id: number): void {
