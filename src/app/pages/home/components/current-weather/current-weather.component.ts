@@ -13,11 +13,11 @@ export class CurrentWeatherComponent {
   @Input() isFavorite: boolean = false;
   @Output() toggleBookmark = new EventEmitter();
 
-  get cityName():string{
+  get cityName(): string {
     return `${this.cityWeather.city.name} - ${this.cityWeather.city.country}`;
   }
 
-  onToggleBookmark(){
+  onToggleBookmark() {
     this.toggleBookmark.emit();
   }
 }

@@ -2,10 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { Bookmark } from 'src/app/shared/models/bookmark.model';
+import * as fromBookmarksActions from '../../state/bookmarks.actions';
 import { BookmarksState } from '../../state/bookmarks.reducer';
+import * as fromBookmarksSelectors from '../../state/bookmarks.selectors';
 
-import * as fromBookmarksActions from '../../state/bookmarks.actions'
-import * as fromBookmarksSelectors from '../../state/bookmarks.selectors'
 
 @Component({
   selector: 'ag-bookmarks',
@@ -15,7 +15,7 @@ import * as fromBookmarksSelectors from '../../state/bookmarks.selectors'
 export class BookmarksPage implements OnInit, OnDestroy {
 
   bookmarks$!: Observable<Array<Bookmark>>;
-  
+
   private componentDestroyed$ = new Subject();
 
   constructor(private store: Store<BookmarksState>) { }
