@@ -1,37 +1,36 @@
-/*import { Component, OnInit, Optional, Self } from '@angular/core';
+import { Component, OnInit, Optional, Self } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 import { Observable, Subscriber } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead/public_api';
 
-import { CityTypeaheadItem } from '../../models/city-typeahead-item.model';
+import { ICityTypeaheadItem } from '../../models/city-typeahead-item.model';
 import { CitiesService } from '../../services/cities.service';
 
 @Component({
-  selector: 'jv-cities-typeahead',
+  selector: 'ag-cities-typeahead',
   templateUrl: './cities-typeahead.component.html',
   styleUrls: ['./cities-typeahead.component.scss'],
 })
 export class CitiesTypeaheadComponent implements OnInit, ControlValueAccessor {
 
-  dataSource$: Observable<CityTypeaheadItem[]>;
-  search: string;
+  dataSource$!: Observable<Array<ICityTypeaheadItem>>;
+  search!: string;
 
-  loading: boolean;
-  disabled: boolean;
-  private onChange: (value: CityTypeaheadItem) => void;
-  private onTouched: () => void;
+  loading!: boolean;
+  disabled!: boolean;
+  private onChange!: (value: ICityTypeaheadItem) => void;
+  private onTouched!: () => void;
 
   constructor(private citiesService: CitiesService,
-              @Optional() @Self() public control: NgControl) {
+    @Optional() @Self() public control: NgControl) {
     control.valueAccessor = this;
   }
 
   ngOnInit() {
     this.dataSource$ = new Observable(
-      (subscriber: Subscriber<string>) => subscriber.next(this.search)
-    )
+      (subscriber: Subscriber<string>) => subscriber.next(this.search))
       .pipe(
         switchMap((query: string) => this.citiesService.getCities(query))
       );
@@ -42,7 +41,7 @@ export class CitiesTypeaheadComponent implements OnInit, ControlValueAccessor {
     this.onChange(match.item);
   }
 
-  registerOnChange(fn: (value: CityTypeaheadItem) => void) {
+  registerOnChange(fn: (value: ICityTypeaheadItem) => void) {
     this.onChange = fn;
   }
 
@@ -57,4 +56,3 @@ export class CitiesTypeaheadComponent implements OnInit, ControlValueAccessor {
   writeValue() {
   }
 }
-*/

@@ -2,12 +2,12 @@
 
     <div class="weather-icon">
         <img [src]="weatherIcon">
-        <span>{{ weather.description }}</span>
+        <span>{{ weather.description | titlecase }}</span>
     </div>
 
     <div class="weather-temp">
-        <h3>{{ weather.temp }} {{ unitSymbol }}
-        </h3>
+        <h2>{{ weather.temp }} {{ unitSymbol }}
+        </h2>
         <span>Sensação térmica: {{ weather.feelsLike }} {{ unitSymbol }}</span>
     </div>
 

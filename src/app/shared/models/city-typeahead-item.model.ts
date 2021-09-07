@@ -1,4 +1,4 @@
-export interface CityTypeaheadItem {
+export interface ICityTypeaheadItem {
   country: string;
   geonameid: number;
   name: string;
