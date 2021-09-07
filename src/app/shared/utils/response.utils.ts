@@ -7,15 +7,15 @@ export function responseToCityWeather(response: any): CityWeather {
       name: response.name,
       country: response.sys.country,
       coord: response.coord,
-      timeZone: undefined,
+      timeZone:  response.timezone,
     },
     weather: {
       id: response.weather[0].id,
       description: response.weather[0].description,
       icon: response.weather[0].icon,
       temp: response.main.temp,
-      minTemp: undefined,
-      maxTemp: undefined,
+      minTemp: response.main.temp.min,
+      maxTemp: response.main.temp.max,
       feelsLike: response.main.feels_like,
       humidity: response.main.humidity,
       wind: {
@@ -31,10 +31,10 @@ export function responseToCityWeather(response: any): CityWeather {
 export function responseToCityDailyWeather(response: any): CityDailyWeather {
   return {
     city: {
-      id: undefined,
-      name: undefined,
+      id: response.id,
+      name: response.name,
       country: undefined,
-      coord: undefined,
+      coord: response.coord,
       timeZone: response.timezone,
     },
     current: {
@@ -42,8 +42,8 @@ export function responseToCityDailyWeather(response: any): CityDailyWeather {
       description: response.current.weather[0].description,
       icon: response.current.weather[0].icon,
       temp: response.current.temp,
-      minTemp: undefined,
-      maxTemp: undefined,
+      minTemp: response.current.temp.min,
+      maxTemp: response.current.temp.max,
       feelsLike: response.current.feels_like,
       humidity: response.current.humidity,
       wind: {
@@ -59,7 +59,7 @@ export function responseToCityDailyWeather(response: any): CityDailyWeather {
         id: d.weather[0].id,
         description: d.weather[0].description,
         icon: d.weather[0].icon,
-        temp: undefined,
+        temp: d.temp,
         minTemp: d.temp.min,
         maxTemp: d.temp.max,
         humidity: d.humidity,

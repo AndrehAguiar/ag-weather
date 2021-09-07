@@ -9,11 +9,7 @@ export const selectRouterState = createSelector(
     (routerReducerState: RouterReducerState<IRouterState>) => (routerReducerState && routerReducerState.state)
 );
 
-export const selectQueryParams = createSelector(
+export const selectRouterQueryParams = createSelector(
     selectRouterState,
     (routerState: IRouterState) => (routerState && routerState.queryParams) || {},
 );
-
-export function selectRouterQueryParams(selectRouterQueryParams: any): import("rxjs").OperatorFunction<import("../app.reducer").IAppState, unknown> {
-    throw new Error("Function not implemented.");
-}

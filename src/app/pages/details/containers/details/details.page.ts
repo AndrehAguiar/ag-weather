@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Units } from 'src/app/shared/models/units.enum';
+import { CityDailyWeather } from 'src/app/shared/models/weather.model';
 import { IAppState } from 'src/app/shared/state/app.reducer';
 import * as fromDetailsActions from '../../state/details.actions';
+import * as fromDetailsSelectors from '../../state/details.selectors';
+import * as fromConfigSelectors from '../../../../shared/state/config/config.selectors';
 
 @Component({
   selector: 'ag-details',
@@ -10,10 +15,24 @@ import * as fromDetailsActions from '../../state/details.actions';
 })
 export class DetailsPage implements OnInit {
 
+  details$!: Observable<CityDailyWeather | undefined>;
+  loading$!: Observable<boolean>;
+  error$!: Observable<boolean>;
+
+  unit$!: Observable<Units>;
+
   constructor(private store: Store<IAppState>) { }
 
   ngOnInit(): void {
     this.store.dispatch(fromDetailsActions.loadWeatherDetails());
+
+    this.details$ = this.store.pipe(select(fromDetailsSelectors.selectDetailsEntity));
+
+    this.loading$ = this.store.pipe(select(fromDetailsSelectors.selectDetailsLoading));
+
+    this.error$ = this.store.pipe(select(fromDetailsSelectors.selectDetailsError));
+
+    this.unit$ = this.store.pipe(select(fromConfigSelectors.selectUnitConfig));
   }
 
 }

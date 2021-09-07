@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { IHomeState } from "./home.reducer";
 
-export interface AppState {
+export interface IAppState {
     feature: IHomeState;
   }
 

@@ -6,7 +6,7 @@ import { map, mergeMap, withLatestFrom } from "rxjs/operators";
 import { Bookmark } from "src/app/shared/models/bookmark.model";
 import { CityWeather } from "src/app/shared/models/weather.model";
 import { WeatherService } from "src/app/shared/services/weather.service";
-import { AppState } from "../../home/state/home.selectors";
+import { IAppState } from "../../home/state/home.selectors";
 import * as fromBookmarksActions from './bookmarks.actions';
 import * as fromBookmarksSelectors from './bookmarks.selectors';
 
@@ -41,7 +41,7 @@ export class BookmarksEffects {
     );
 
     constructor(private actions$: Actions,
-        private store: Store<AppState>,
+        private store: Store<IAppState>,
         private weatherService: WeatherService) {
 
     }

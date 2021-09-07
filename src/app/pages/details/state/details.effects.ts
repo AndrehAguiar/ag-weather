@@ -12,7 +12,7 @@ import * as fromDetailsActions from "./details.actions";
 @Injectable()
 export class DetailsEffects {
 
-    loadCurrentWeather$ = createEffect((): any => this.actions$
+    loadCurrentWeather$ = createEffect(() => this.actions$
         .pipe(
             ofType(fromDetailsActions.loadWeatherDetails),
             withLatestFrom(this.store.pipe(
@@ -23,11 +23,11 @@ export class DetailsEffects {
                     this.weatherService.getWeatherDetails(queryParams.lat, queryParams.lon),
                 ])
             ),
-            catchError((err, caugth$) => {
+            catchError((err, caught$) => {
                 this.store.dispatch(fromDetailsActions.loadWeatherDetailsFailed());
-                return caugth$;
+                return caught$;
             }),
-            map(([current, daily]: [any, any]) => {
+            map(([current, daily]) => {
                 const entity = daily;
                 entity.city = { ...current.city, timeZone: daily.city.timeZone };
                 return fromDetailsActions.loadWeatherDetailsSuccess({ entity });

@@ -9,12 +9,14 @@ import { CurrentWeatherComponent } from './components/current-weather/current-we
 import { HomePage } from './containers/home/home.page';
 import { HomeEffects } from './state/home.effects';
 import { homeReducer } from './state/home.reducer';
+import { UnitSelectorComponent } from './containers/unit-selector/unit-selector.component';
 
 
 @NgModule({
   declarations: [
     HomePage,
-    CurrentWeatherComponent
+    CurrentWeatherComponent,
+    UnitSelectorComponent
   ],
   imports: [
     CommonModule,

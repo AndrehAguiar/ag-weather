@@ -17,12 +17,12 @@ import { DailyWeatherComponent } from './components/daily-weather/daily-weather.
   ],
   imports: [
     CommonModule,
+    ComponentsModule,
+    EffectsModule.forFeature([DetailsEffects]),
+    StoreModule.forFeature('details', detailsReducer),
     RouterModule.forChild([
       { path: '', component: DetailsPage, canActivate: [DetailsGuardService] },
     ]),
-    StoreModule.forFeature('details', detailsReducer),
-    EffectsModule.forFeature([DetailsEffects]),
-    ComponentsModule,
   ],
   providers: [
     DetailsGuardService,

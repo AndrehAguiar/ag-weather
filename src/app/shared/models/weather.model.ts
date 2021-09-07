@@ -13,12 +13,12 @@ export interface City {
   id: number | undefined;
   name: string | undefined;
   country: string | undefined;
-  coord: Coord | undefined;
-  timeZone: string | undefined;
+  coord: Coord;
+  timeZone: string;
 }
 
 export interface Weather {
-  id: number | undefined;
+  id: number;
   description: string;
   icon: string;
   temp: number;
