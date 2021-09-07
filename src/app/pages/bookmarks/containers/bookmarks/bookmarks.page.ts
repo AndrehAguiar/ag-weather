@@ -2,10 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { Bookmark } from 'src/app/shared/models/bookmark.model';
-import { BookmarksState } from './state/bookmarks.reducer';
+import { BookmarksState } from '../../state/bookmarks.reducer';
 
-import * as fromBookmarksActions from '../bookmarks/state/bookmarks.actions'
-import * as fromBookmarksSelectors from '../bookmarks/state/bookmarks.selectors'
+import * as fromBookmarksActions from '../../state/bookmarks.actions'
+import * as fromBookmarksSelectors from '../../state/bookmarks.selectors'
 
 @Component({
   selector: 'ag-bookmarks',
