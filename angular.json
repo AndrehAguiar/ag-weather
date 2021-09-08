@@ -23,6 +23,10 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
+                        "allowedCommonJsDependencies": [
+                            "moment-timezone",
+                            "moment/locale/pt-br"
+                        ],
                         "outputPath": "dist/ag-weather",
                         "index": "src/index.html",
                         "main": "src/main.ts",
@@ -44,8 +48,8 @@
                         "production": {
                             "budgets": [{
                                     "type": "initial",
-                                    "maximumWarning": "500kb",
-                                    "maximumError": "1mb"
+                                    "maximumWarning": "1.5mb",
+                                    "maximumError": "2mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",
